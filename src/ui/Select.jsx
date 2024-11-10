@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from "styled-components";
 
 const StyledSelect = styled.select`
@@ -13,3 +14,13 @@ const StyledSelect = styled.select`
   font-weight: 500;
   box-shadow: var(--shadow-sm);
 `;
+
+function Selection({ children, ...props }, ref) {
+  return (
+    <StyledSelect ref={ref} {...props}>
+      {children}
+    </StyledSelect>
+  );
+}
+
+export default React.forwardRef(Selection);

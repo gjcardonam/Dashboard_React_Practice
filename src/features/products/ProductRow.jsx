@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import { formatCurrency } from "../../utils/helpers";
-import CreateCabinForm from "./CreateCabinForm";
-import { useDeleteCabin } from "./useDeleteCabin";
+import CreateProductForm from "./CreateProductForm";
+import { useDeleteProduct } from "./useDeleteProduct";
 import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
-import { useCreateCabin } from "./useCreateCabin";
+import { useCreateProduct } from "./useCreateProduct";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 
 const TableRow = styled.div`
   display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   column-gap: 2.4rem;
   align-items: center;
   padding: 1.4rem 2.4rem;
@@ -19,16 +19,7 @@ const TableRow = styled.div`
   }
 `;
 
-const Img = styled.img`
-  display: block;
-  width: 6.4rem;
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
-  object-position: center;
-  transform: scale(1.5) translateX(-7px);
-`;
-
-const Cabin = styled.div`
+const Product = styled.div`
   font-size: 1.6rem;
   font-weight: 600;
   color: var(--color-grey-600);
@@ -40,48 +31,37 @@ const Price = styled.div`
   font-weight: 600;
 `;
 
-const Discount = styled.div`
-  font-family: "Sono";
-  font-weight: 500;
-  color: var(--color-green-700);
-`;
-
-export default function CabinRow({ cabin }) {
-  const { isDeliting, deleteCabin } = useDeleteCabin();
-  const { isCreating: isDuplicating, createCabin } = useCreateCabin();
+export default function ProductRow({ product }) {
+  const { isDeliting, deleteProduct } = useDeleteProduct();
+  const { isCreating: isDuplicating, createProduct } = useCreateProduct();
 
   const {
-    id: cabinId,
+    id,
     name,
-    maxCapacity,
-    regularPrice,
-    discount,
-    image,
     description,
-  } = cabin;
+    category,
+    price,
+    stockQuantity
+  } = product;
 
   function handleDuplicate() {
-    createCabin({
+    createProduct({
       name: `Copy of ${name}`,
-      maxCapacity,
-      regularPrice,
-      discount,
-      image,
       description,
+      category,
+      price,
+      stockQuantity
     });
   }
 
   return (
     <TableRow role="row">
-      <Img src={image} alt={name} />
-      <Cabin>{name}</Cabin>
-      <div>{maxCapacity}</div>
-      <Price>{formatCurrency(regularPrice)}</Price>
-      {discount ? (
-        <Discount>{formatCurrency(discount)}</Discount>
-      ) : (
-        <span>&mdash;</span>
-      )}
+      {/* <Img src={image} alt={name} /> */}
+      <Product>{name}</Product>
+      <Product>{description}</Product>
+      <Product>{category.name}</Product>
+      <Price>{formatCurrency(price)}</Price>
+      <div>{stockQuantity}</div>
       <div>
         <button onClick={handleDuplicate} disabled={isDuplicating}>
           <HiSquare2Stack />
@@ -93,7 +73,7 @@ export default function CabinRow({ cabin }) {
             </button>
           </Modal.Open>
           <Modal.Window name="edit">
-            <CreateCabinForm cabinToEdit={cabin} />
+            <CreateProductForm productToEdit={product} />
           </Modal.Window>
 
           <Modal.Open opens="delete">
@@ -102,9 +82,9 @@ export default function CabinRow({ cabin }) {
             </button>
           </Modal.Open>
           <Modal.Window name="delete">
-            <ConfirmDelete resourceName='cabins'
+            <ConfirmDelete resourceName='products'
             disable={isDeliting}
-            onConfirm={() => deleteCabin(cabinId)} />
+            onConfirm={() => deleteProduct(id)} />
           </Modal.Window>
         </Modal>
       </div>

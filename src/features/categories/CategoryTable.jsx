@@ -1,8 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
-import { getCabins } from "../../services/apiCabings";
 import Spinner from "../../ui/Spinner";
-import CabinRow from "./CabinRow";
+import CategoryRow from "./CategoryRow";
+import { useCategories } from "./useCategories";
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -15,7 +14,7 @@ const Table = styled.div`
 
 const TableHeader = styled.header`
   display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   column-gap: 2.4rem;
   align-items: center;
 
@@ -28,15 +27,9 @@ const TableHeader = styled.header`
   padding: 1.6rem 2.4rem;
 `;
 
-export default function CabinTable() {
-  const {
-    isLoading,
-    data: cabins,
-    error
-  } = useQuery({
-    queryKey: ['cabins'],
-    queryFn: getCabins,
-  })
+export default function CategoryTable() {
+  
+  const { isLoading, categories, error } = useCategories()
 
   if (isLoading) return <Spinner />
 
@@ -47,15 +40,12 @@ export default function CabinTable() {
   return (
     <Table role="table">
       <TableHeader role="row">
-        <div></div>
-        <div>Cabin</div>
-        <div>Capacity</div>
-        <div>Price</div>
-        <div>Discount</div>
+        <div>Nombre</div>
+        <div>Descripción</div>
         <div></div>
       </TableHeader>
-      {cabins.map((cabin) => (
-        <CabinRow key={cabin.id} cabin={cabin} />
+      {categories.map((category) => (
+        <CategoryRow key={category.id} category={category} />
       ))}
     </Table>
   )
