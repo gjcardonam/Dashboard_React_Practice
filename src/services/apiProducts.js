@@ -2,7 +2,7 @@ import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
-const apiUrl = "http://localhost:8080/api/products";
+const apiUrl = "https://apimana.onrender.com/api/products";
 
 // Obtener productos
 export async function getProducts() {
