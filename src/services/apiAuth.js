@@ -27,7 +27,7 @@ export async function login({ username, password }) {
 }
 
 export async function getCurrentUser() {
-  const apiUrl = "http://localhost:8080/api/auth/me";
+  const apiUrl = "https://apimana.onrender.com/api/auth/me";
 
   try {
     const response = await axios({
@@ -46,7 +46,7 @@ export async function getCurrentUser() {
 }
 
 export async function logout() {
-  const apiUrl = "http://localhost:8080/api/auth/signout";
+  const apiUrl = "https://apimana.onrender.com/api/auth/signout";
 
   try {
     const response = await axios({
@@ -65,7 +65,7 @@ export async function logout() {
 }
 
 export async function createUser({ email, password, fullName: username }) {
-  const apiUrl = "http://localhost:8080/api/auth/signup";
+  const apiUrl = "https://apimana.onrender.com/api/auth/signup";
 
   try {
     const response = await axios({
