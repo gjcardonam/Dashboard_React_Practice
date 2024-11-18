@@ -35,13 +35,19 @@ function CreateProductForm({ productToEdit = {}, onCloseModal }) {
 
   function onSubmit(data) {
 
+    const processedData = {
+      ...data,
+      price: Number(data.price),
+      stockQuantity: Number(data.stockQuantity),
+    };
+
     const selectedCategoryId = data.category;
 
     const selectedCategory = categories.find(category => category.id == selectedCategoryId)
-
+    
     if (isEditSession)
       editProduct(
-        { newProductData: { ...data }, id: editId, category: selectedCategory },
+        { newProductData: { ...processedData, category: selectedCategory }, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -51,7 +57,7 @@ function CreateProductForm({ productToEdit = {}, onCloseModal }) {
       );
     else
       createProduct(
-        { ...data, category: selectedCategory },
+        { ...processedData, category: selectedCategory },
         {
           onSuccess: () => {
             reset();

@@ -22,7 +22,14 @@ const Category = styled.div`
   font-size: 1.6rem;
   font-weight: 600;
   color: var(--color-grey-600);
-  font-family: "Sono";
+  font-family: "Roboto";
+`;
+
+const Description = styled.div`
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--color-grey-600);
+  font-family: "Roboto";
 `;
 
 export default function CategoryRow({ category }) {
@@ -37,7 +44,7 @@ export default function CategoryRow({ category }) {
 
   function handleDuplicate() {
     createCategory({
-      name: `Copy of ${name}`,
+      name: `Copia de ${name}`,
       description
     });
   }
@@ -46,7 +53,7 @@ export default function CategoryRow({ category }) {
     <TableRow role="row">
       {/* <Img src={image} alt={name} /> */}
       <Category>{name}</Category>
-      <Category>{description}</Category>
+      <Description>{description}</Description>
       <div>
         <button onClick={handleDuplicate} disabled={isDuplicating}>
           <HiSquare2Stack />

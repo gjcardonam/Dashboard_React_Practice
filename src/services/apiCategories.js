@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const apiUrl = "http://localhost:8080/categories";
+axios.defaults.withCredentials = true;
+
+const apiUrl = "http://localhost:8080/api/categories";
 
 export async function getCategories() {
   try {
@@ -14,8 +16,6 @@ export async function getCategories() {
 
 export async function createEditCategory(newCategory, id = null) {
   try {
-    console.log(`${apiUrl}/${id}`);
-
     const response = await axios({
       method: id ? "put" : "post",
       url: id ? `${apiUrl}/${id}` : apiUrl,
@@ -25,7 +25,7 @@ export async function createEditCategory(newCategory, id = null) {
       data: {
         name: newCategory.name,
         description: newCategory.description
-      },
+      }
     });
 
     return response.data;

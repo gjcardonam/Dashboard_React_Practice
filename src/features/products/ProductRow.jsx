@@ -23,12 +23,27 @@ const Product = styled.div`
   font-size: 1.6rem;
   font-weight: 600;
   color: var(--color-grey-600);
-  font-family: "Sono";
+  font-family: "Roboto";
+`;
+
+const Description = styled.div`
+  font-family: "Roboto";
+  font-weight: 500;
+`;
+
+const Category = styled.div`
+  font-family: "Roboto";
+  font-weight: 500;
 `;
 
 const Price = styled.div`
-  font-family: "Sono";
-  font-weight: 600;
+  font-family: "Roboto";
+  font-weight: 500;
+`;
+
+const StockQuantity = styled.div`
+  font-family: "Roboto";
+  font-weight: 500;
 `;
 
 export default function ProductRow({ product }) {
@@ -46,7 +61,7 @@ export default function ProductRow({ product }) {
 
   function handleDuplicate() {
     createProduct({
-      name: `Copy of ${name}`,
+      name: `Copia de ${name}`,
       description,
       category,
       price,
@@ -58,10 +73,10 @@ export default function ProductRow({ product }) {
     <TableRow role="row">
       {/* <Img src={image} alt={name} /> */}
       <Product>{name}</Product>
-      <Product>{description}</Product>
-      <Product>{category.name}</Product>
+      <Description>{description}</Description>
+      <Category>{category.name}</Category>
       <Price>{formatCurrency(price)}</Price>
-      <div>{stockQuantity}</div>
+      <StockQuantity>{stockQuantity}</StockQuantity>
       <div>
         <button onClick={handleDuplicate} disabled={isDuplicating}>
           <HiSquare2Stack />

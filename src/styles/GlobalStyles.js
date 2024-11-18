@@ -3,14 +3,15 @@ import {createGlobalStyle} from "styled-components";
 const GlobalStyles = createGlobalStyle`
     :root {
         /* Indigo */
-        --color-brand-50: #eef2ff;
-        --color-brand-100: #e0e7ff;
-        --color-brand-200: #c7d2fe;
-        --color-brand-500: #6366f1;
-        --color-brand-600: #4f46e5;
-        --color-brand-700: #4338ca;
-        --color-brand-800: #3730a3;
-        --color-brand-900: #312e81;
+        --color-brand-50: #fdeef3;
+        --color-brand-100: #fbd7e4;
+        --color-brand-200: #f6b3cb;
+        --color-brand-500: #d996b5;
+        --color-brand-600: #c87ca2;
+        --color-brand-700: #b0698b;
+        --color-brand-800: #8f566f;
+        --color-brand-900: #733e55;
+
 
         /* Grey */
         --color-grey-0: #fff;
@@ -72,7 +73,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     body {
-        font-family: "Poppins", sans-serif;
+        font-family: "Roboto", sans-serif;
         color: var(--color-grey-700);
 
         transition: color 0.3s, background-color 0.3s;

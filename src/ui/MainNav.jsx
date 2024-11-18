@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { HiOutlineCalendarDays, HiOutlineCog6Tooth, HiOutlineHome, HiOutlineHomeModern, HiOutlineUsers } from "react-icons/hi2";
+import { HiRectangleGroup, HiUsers } from "react-icons/hi2";
+import { HiShoppingBag } from "react-icons/hi";
+import { useUser } from "../features/authentication/useUser"
 
 
 const NavList = styled.ul`
@@ -49,25 +51,27 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 export default function MainNav() {
+  const { user } = useUser();
+
   return (
     <nav>
       <NavList>
-        <li>
-          <StyledNavLink to="/dashboard">
-            <HiOutlineHome />
-            <span>Home</span>
-          </StyledNavLink>
-        </li>
-        <li>
+        {user?.roles.includes("ROLE_USER") && <><li>
           <StyledNavLink to="/products">
-          <HiOutlineCalendarDays />
+          <HiShoppingBag />
           Productos</StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/categories">
-          <HiOutlineCalendarDays />
+          <HiRectangleGroup />
           Categorías</StyledNavLink>
-        </li>
+        </li></>}
+        
+        {user?.roles.includes("ROLE_ADMIN") && <li>
+          <StyledNavLink to="/users">
+          <HiUsers />
+          Usuarios</StyledNavLink>
+        </li>}
       </NavList>
     </nav>
   );

@@ -3,36 +3,51 @@ import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
 import FormRowVertical from "../../ui/FormRowVertical";
+import { useLogin } from "./useLogin";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
 
-  function handleSubmit() {}
+  const { login, isLoading } = useLogin();
+
+  function handleSubmit( e ) {
+    e.preventDefault();
+    if(!username || !password) return;
+    login({ username, password }, {
+      onSettled: () => {
+        setPassword("");
+      },
+    });
+  }
 
   return (
     <Form onSubmit={handleSubmit}>
-      <FormRowVertical label="Email address">
+      <FormRowVertical label="Usuario">
         <Input
-          type="email"
-          id="email"
-          // This makes this form better for password managers
+          type="text"
+          id="username"
           autoComplete="username"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          disabled={isLoading}
         />
       </FormRowVertical>
-      <FormRowVertical label="Password">
+      <FormRowVertical label="Contraseña">
         <Input
           type="password"
           id="password"
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          disabled={isLoading}
         />
       </FormRowVertical>
       <FormRowVertical>
-        <Button size="large">Login</Button>
+        <Button size="large">
+          {!isLoading ? "Iniciar Sesión" : <SpinnerMini />}
+        </Button>
       </FormRowVertical>
     </Form>
   );

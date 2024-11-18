@@ -12,10 +12,6 @@ export function useDeleteCategory() {
       queryClient.invalidateQueries({
         queryKey: ["categories"],
       });
-
-      queryClient.invalidateQueries({
-        queryKey: ["categories"],
-      });
     },
     onError: (error) => toast.error(error.message),
   });

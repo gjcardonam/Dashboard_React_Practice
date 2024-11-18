@@ -9,7 +9,6 @@ function Products() {
     <>
       <Row type="horizontal">
         <Heading as="h1">Todos los Productos</Heading>
-        <p>Filtrar - Ordenar</p>
       </Row>
 
       <Row>

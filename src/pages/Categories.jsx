@@ -9,7 +9,6 @@ function Categories() {
     <>
       <Row type="horizontal">
         <Heading as="h1">Todas las Categorias</Heading>
-        <p>Filtrar - Ordenar</p>
       </Row>
 
       <Row>

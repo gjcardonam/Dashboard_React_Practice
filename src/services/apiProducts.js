@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const apiUrl = "http://localhost:8080/products";
+axios.defaults.withCredentials = true;
+
+const apiUrl = "http://localhost:8080/api/products";
 
 // Obtener productos
 export async function getProducts() {
@@ -14,6 +16,7 @@ export async function getProducts() {
 }
 
 export async function createEditProduct(newProduct, id = null) {
+
   try {
     const response = await axios({
       method: id ? "put" : "post",
@@ -26,8 +29,9 @@ export async function createEditProduct(newProduct, id = null) {
         description: newProduct.description,
         price: newProduct.price,
         category: newProduct.category,
-        stock_quantity: newProduct.stockQuantity,
+        stockQuantity: newProduct.stockQuantity,
       },
+      withCredentials: true
     });
 
     return response.data;
